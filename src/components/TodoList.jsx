@@ -1,24 +1,27 @@
 /** @format */
 
 import React from 'react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { useTodoAction } from '../common/Hooks/useTodoAction';
 import TodoItem from './TodoItem';
 
 const TodoList = () => {
-	const {  todos } = useTodoAction();
+	const { todos } = useTodoAction();
 	return (
-		<div>
-			<ul className='Todo__list'>
+		<ul className='Todo__list'>
+			<TransitionGroup>
 				{todos?.map((item) => (
-					<TodoItem
-						key={item.id}
-						id={item.id}
-						text={item.text}
-						checked={item.checked}
-					/>
+					<CSSTransition timeout={1500} classNames='item'>
+						<TodoItem
+							key={item.id}
+							id={item.id}
+							text={item.text}
+							checked={item.checked}
+						/>
+					</CSSTransition>
 				))}
-			</ul>
-		</div>
+			</TransitionGroup>
+		</ul>
 	);
 };
 

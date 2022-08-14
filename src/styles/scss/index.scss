@@ -20,6 +20,7 @@
 	max-width: 25rem;
 	width: 100%;
 	background-color: $primary;
+    overflow: hidden;
 	.Todo__list {
 		padding: 0 0.5rem;
 		.Todo__list_item {
@@ -89,4 +90,25 @@
 		color: $secondary-content;
 		padding: 0.5rem 1rem;
 	}
+}
+
+
+.item-enter {
+	transform: translateX(-110%);
+	opacity: 0;
+}
+.item-enter-active {
+	transform: translateX(0);
+	opacity: 1;
+	transition: all 500ms;
+}
+.item-exit {
+	transform: translateX(0);
+	opacity: 0;
+    display: none;
+}
+.item-exit-active {
+	transform: translateX(110%);
+	opacity: 1;
+	transition: all 500ms;
 }

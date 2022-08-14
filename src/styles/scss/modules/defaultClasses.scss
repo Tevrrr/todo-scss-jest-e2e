@@ -1,0 +1,30 @@
+/** @format */
+
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+
+button {
+	background: none;
+	border: none;
+	cursor: pointer;
+	font: inherit;
+}
+
+input {
+	border: none;
+	background: none;
+	font: inherit;
+	outline: inherit;
+	width: 5rem;
+}
+
+li {
+	list-style-type: none;
+}
+
+ul {
+	margin-left: 0;
+	padding-left: 0;
+}

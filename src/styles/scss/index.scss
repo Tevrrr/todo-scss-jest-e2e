@@ -1,0 +1,92 @@
+/** @format */
+
+@import './imports';
+
+:root {
+	font-size: $root-font-size;
+	font-family: $font-stack;
+}
+
+.App {
+	@extend %flex-center;
+	min-height: 100vh;
+	background-color: $base-100;
+	padding: 0.5rem;
+}
+
+.Todo {
+	@extend %rounded;
+	min-height: 35rem;
+	max-width: 25rem;
+	width: 100%;
+	background-color: $primary;
+	.Todo__list {
+		padding: 0 0.5rem;
+		.Todo__list_item {
+			@extend %flex-center, %rounded, %transition;
+			color: $primary-content;
+			font-size: 1.2rem;
+			font-weight: 600;
+            padding-right: .5rem;
+			&:hover {
+				background-color: rgba($primary-focus, 0.5);
+			}
+			div {
+				@extend %flex-center;
+				gap: 0.2rem;
+			}
+			.Todo__label {
+				cursor: pointer;
+				flex-grow: 1;
+				display: flex;
+				align-items: center;
+				justify-content: start;
+				gap:1rem;
+				padding: 1rem 0.5rem;
+				input[type='checkbox'] {
+					display: none;
+				}
+				.Todo__checkbox {
+					@extend %flex-center, %rounded, %transition;
+					width: 1.5rem;
+					height: 1.5rem;
+					overflow: hidden;
+					border: solid 0.15rem $secondary;
+					.material-icons {
+						@extend %transition;
+						color: $secondary-content;
+						translate: 0 1.5rem;
+					}
+				}
+				input:checked ~ .Todo__checkbox {
+					background-color: $secondary;
+					.material-icons {
+						translate: 0;
+					}
+				}
+			}
+		}
+		.Todo__list_button {
+			@include button($accent, $accent-content, $accent-focus);
+			@extend %circle;
+		}
+	}
+}
+
+.input_panel {
+	@extend %flex-center;
+	gap: 0.3rem;
+	font-size: 1.2rem;
+	padding: 1rem;
+	.input_panel__button {
+		@include button($secondary, $secondary-content, $secondary-focus, 600);
+		@extend %circle;
+	}
+	.input_panel__input {
+		@extend %rounded, %transition;
+		flex-grow: 1;
+		background-color: $secondary;
+		color: $secondary-content;
+		padding: 0.5rem 1rem;
+	}
+}

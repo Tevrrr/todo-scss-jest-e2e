@@ -1,0 +1,17 @@
+/** @format */
+
+@mixin button(
+	$bg-color: $neutral,
+	$text-color: $neutral-content,
+	$focus-color: $neutral-focus,
+	$font-weight: 500
+) {
+	@extend %rounded, %transition, %flex-center;
+	background-color: $bg-color;
+	color: $text-color;
+	padding: 0.5rem;
+	font-weight: 600;
+	&:hover {
+		background-color: $focus-color;
+	}
+}

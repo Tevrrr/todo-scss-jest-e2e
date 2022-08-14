@@ -1,0 +1,21 @@
+%flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+%rounded{
+    border-radius: 20px;
+}
+
+%circle{
+    border-radius: 9999999px;
+}
+
+%transition{
+    transition: all $duration;
+}
+
+%button{
+    transition: all $duration;
+}

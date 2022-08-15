@@ -1,24 +1,30 @@
 /** @format */
 
 import { createContext, useState, useEffect } from 'react';
+import { loadDataFromCache } from './Cache/loadDataFromCache.js';
+import { saveDataToCache } from './Cache/saveDataToCache.js';
 
 export const TodoContext = createContext();
 
-const TodoProvider = ({ children }) => {
-	const [todos, setTodos] = useState([]);
+const TodoProvider = ({ children, initialValue = [] }) => {
+	const [todos, setTodos] = useState(initialValue);
 	const [counterID, setCounterID] = useState(0);
 	const [isLoad, setIsLoad] = useState(false);
 
 	useEffect(() => {
-		if (isLoad) saveDataToCache();
+		if (isLoad) saveDataToCache(todos, counterID);
 		if (todos.length === 0) setCounterID(0);
 	}, [todos, isLoad]);
 	useEffect(() => {
-		loadDataFromCache();
+        loadDataFromCache((todos, counterID, isLoad) => {
+            setTodos(todos);
+            setCounterID(counterID);
+            setIsLoad(isLoad);
+        });
 	}, []);
 
 	const addTodo = (text) => {
-		const newTodo = { id: counterID + 1, checked: false, text };
+		const newTodo = { id: counterID, checked: false, text };
 		setCounterID(counterID + 1);
 		setTodos([...todos, newTodo]);
 	};
@@ -37,22 +43,6 @@ const TodoProvider = ({ children }) => {
 		);
 	};
 
-	const loadDataFromCache = () => {
-		const counterID = localStorage.getItem('counterID');
-		const todos = localStorage.getItem('todos');
-		if (counterID) {
-			setCounterID(JSON.parse(counterID));
-		}
-		if (todos) {
-			setTodos(JSON.parse(todos));
-		}
-
-		setIsLoad(true);
-	};
-	const saveDataToCache = () => {
-		localStorage.setItem('todos', JSON.stringify(todos));
-		localStorage.setItem('counterID', counterID);
-	};
 	return (
 		<TodoContext.Provider
 			value={{ todos, addTodo, removeTodo, checkedTodo }}>

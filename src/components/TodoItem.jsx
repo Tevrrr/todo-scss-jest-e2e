@@ -1,7 +1,6 @@
 /** @format */
 
 import React from 'react';
-import { CSSTransition } from 'react-transition-group';
 import { useTodoAction } from '../common/Hooks/useTodoAction';
 
 const TodoItem = ({ id, text, checked }) => {
@@ -13,13 +12,14 @@ const TodoItem = ({ id, text, checked }) => {
 		checkedTodo(id);
 	};
 	return (
-		<li className='Todo__list_item'>
+		<li data-testid='todo-item' className='Todo__list_item'>
 			{' '}
-			<label className='Todo__label'>
+			<label data-testid='todo-label' className='Todo__label'>
 				<input
 					checked={checked}
 					onChange={toggleChecked}
 					type='checkbox'
+					data-testid='todo-checkbox'
 				/>
 				<div className='Todo__checkbox'>
 					<span className='material-icons material-icons-round'>
@@ -28,7 +28,10 @@ const TodoItem = ({ id, text, checked }) => {
 				</div>
 				{text}
 			</label>{' '}
-			<button onClick={removeItem} className='Todo__list_button'>
+			<button
+				data-testid='todo-remove-button'
+				onClick={removeItem}
+				className='Todo__list_button'>
 				<span className='material-icons material-icons-round'>
 					delete
 				</span>

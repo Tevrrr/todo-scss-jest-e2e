@@ -6,7 +6,9 @@ import TodoList from '../components/TodoList';
 import TodoProvider from '../common/TodoProvider';
 import { loadDataFromCache } from '../common/Cache/loadDataFromCache.js';
 import { saveDataToCache } from '../common/Cache/saveDataToCache.js';
+import { config } from 'react-transition-group';
 
+config.disabled = true;
 jest.mock('../common/Cache/loadDataFromCache.js');
 jest.mock('../common/Cache/saveDataToCache.js');
 
@@ -28,7 +30,6 @@ describe('Todo list test', () => {
 				<TodoList />
 			</TodoProvider>
 		);
-
 		expect(screen.getAllByTestId('todo-item').length).toBe(3);
 	});
 
@@ -74,9 +75,30 @@ describe('Todo list test', () => {
 				<TodoList />
 			</TodoProvider>
 		);
-
-		expect(screen.getAllByTestId('todo-checkbox')[1]).not.toBeChecked();
-		fireEvent.click(screen.getAllByTestId('todo-label')[1]);
+        expect(screen.getAllByTestId('todo-checkbox')[1]).not.toBeChecked();
+        
+        fireEvent.click(screen.getAllByTestId('todo-label')[1]);
+        
 		expect(screen.getAllByTestId('todo-checkbox')[1]).toBeChecked();
+	});
+	test('List item remoute', () => {
+		render(
+			<TodoProvider
+				initialValue={[
+					{ id: 1, checked: false, text: '1' },
+					{ id: 2, checked: false, text: '2' },
+					{ id: 3, checked: false, text: '3' },
+				]}>
+				<TodoList />
+			</TodoProvider>
+		);
+        expect(screen.getAllByTestId('todo-item').length).toBe(3);
+        expect(screen.getAllByTestId('todo-item-text')[0]).toHaveTextContent('1');
+
+        fireEvent.click(screen.getAllByTestId('todo-remove-button')[0]);
+        
+        expect(screen.getAllByTestId('todo-item').length).toBe(2);
+        expect(screen.getAllByTestId('todo-item-text')[0]).toHaveTextContent('2');
+
 	});
 });

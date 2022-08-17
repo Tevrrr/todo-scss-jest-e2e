@@ -4,7 +4,7 @@ export const loadDataFromCache = (props = ()=>{}) => {
 
     let counterID = 0;
     let todos = [];
-
+    if (counterID_JSON === null && todos_JSON === null) return null;
 	if (counterID_JSON) {
 		counterID = JSON.parse(counterID_JSON);
 	}

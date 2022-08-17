@@ -26,7 +26,7 @@ const TodoItem = ({ id, text, checked }) => {
 						done
 					</span>
 				</div>
-				{text}
+				<p data-testid='todo-item-text'>{text}</p>
 			</label>{' '}
 			<button
 				data-testid='todo-remove-button'

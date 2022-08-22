@@ -2,5 +2,6 @@
 
 export const saveDataToCache = (todos, counterID) => {
 	localStorage.setItem('todos', JSON.stringify(todos));
-	localStorage.setItem('counterID', counterID);
+    localStorage.setItem('counterID', counterID);
+    console.log(1)
 };

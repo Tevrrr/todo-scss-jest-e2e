@@ -15,12 +15,14 @@ const TodoProvider = ({ children, initialValue = [] }) => {
 		if (isLoad) saveDataToCache(todos, counterID);
 		if (todos.length === 0) setCounterID(0);
 	}, [todos, isLoad]);
-	useEffect(() => {
+    useEffect(() => {
+        if(!isLoad){
         loadDataFromCache((todos, counterID, isLoad) => {
             setTodos(todos);
             setCounterID(counterID);
-            setIsLoad(isLoad);
+            
         });
+        setIsLoad(true);}
 	}, []);
 
 	const addTodo = (text) => {
